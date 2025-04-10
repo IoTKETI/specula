@@ -5,40 +5,47 @@ defineProps({
     required: true,
   },
 })
+
+import eventBus from '@/utils/eventBus'; // eventBus.js 파일 경로에 따라 수정
+
+const emitLookSkyview = () => {
+  eventBus.emit('do-lookSkyview', { text: 'lookSkyview' });
+};
+
+const emitLookSideview = () => {
+  eventBus.emit('do-lookSideview', { text: 'lookSideview' });
+};
+
+const emitLookAirport = () => {
+  eventBus.emit('do-lookAirport', { text: 'lookAirport' });
+};
+
 </script>
 
 <template>
-  <div class="greetings no-margin-padding">
-    <h1 class="green">{{ msg }}</h1>
-    <h3>
-      You’ve successfully created a project with
-      <a href="https://vite.dev/" target="_blank" rel="noopener">Vite</a> +
-      <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>.
-    </h3>
+  <div id="toolbar">
+    <h5>항공기 관점 변경하기</h5>
+    <div id="camcontrol">
+      <button @click="emitLookSkyview">상공에서 바라보기</button>
+      <button @click="emitLookSideview">측면에서 바라보기</button>
+      <button @click="emitLookAirport">항공기 바라보기</button>
+    </div>
   </div>
 </template>
 
 <style scoped>
-h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  position: relative;
-  top: -10px;
+#toolbar {
+  padding: 1px;
+  border-redius: 4px;
 }
 
-h3 {
-  font-size: 1.2rem;
+#toolbar input{
+  vertical-align:middle;
+  padding-top:2px;
+  padding-bottom:2px;
 }
 
-.greetings h1,
-.greetings h3 {
-  text-align: center;
-}
-
-@media (min-width: 1024px) {
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
-  }
+#toolbar.header{
+  font-weight:bold;
 }
 </style>
